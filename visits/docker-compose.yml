@@ -1,0 +1,9 @@
+version: "3" #version of docker compose
+services: #services is a type of container
+  redis-server:
+    image: "redis"
+  node-app:
+    restart: always
+    build: . #look in current directory for docker file and build
+    ports:
+      - "4001:8081"
