@@ -1,0 +1,19 @@
+version: "3" #version of docker compose
+services: #2 containers now
+  react-app:
+    build: #look in current directory for docker file and build
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - /app/node_modules #do not try and map a folder up against app/node_modules in the folder
+      - .:/app/ #current folder outside container mapped to app folder inside the container
+  tests:
+    build: #look in current directory for docker file and build
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /app/node_modules #do not try and map a folder up against app/node_modules in the folder
+      - .:/app/
+    command: ["npm", "run", "test"] #override default npm run start
